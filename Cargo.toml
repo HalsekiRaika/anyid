@@ -1,0 +1,19 @@
+[package]
+name = "anyid"
+description = "Provides ambiguous identifier."
+repository = "https://github.com/HalsekiRaika/anyid.git"
+authors = ["ReiRokusanami <reirokusanami.rdh@gmail.com>"]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dyn-hash = "0.2.0"
+
+
+[dev-dependencies]
+trybuild = "^1"
+uuid = { version =  "^1", features = ["v4"] }

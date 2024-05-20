@@ -3,7 +3,7 @@ name = "anyid"
 description = "Provides ambiguous identifier."
 repository = "https://github.com/HalsekiRaika/anyid.git"
 authors = ["ReiRokusanami <reirokusanami.rdh@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 

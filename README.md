@@ -5,6 +5,11 @@ while keeping the type information ambiguous.
 
 ---
 
+## Why is this necessary?
+All data often has an identifier to identify it. Often it is tightly constrained by the type. (e.g, using the NewType pattern such as `ProductId(uuid::Uuid)` instead of just `uuid::Uuid`).
+However, when these data are lumped together and treated as just data in an integrated manner, such type restrictions seem a bit cumbersome. Therefore, we can solve this problem by providing a TraitObject that uses a Trait that is a collection of Traits that would be implemented at a minimum when used as an identifier.
+Note that this crate is intended to facilitate data handling at the application level and is not intended for ignore type processing such as (De)Serialize. Also, if you use this crate as an identifier for data, it can be very troublesome later on, since it only implements what is needed to handle the data in an organized manner.
+
 ## Details
 
 ### Inner structure
@@ -19,7 +24,7 @@ pub struct AnyId(Arc<dyn Identifier>);
 Trait, `Identifier`, is automatically implemented for structures with several Trait implementations.
 
 * `Copy`
-  * Because most of the time, keys are used in K/V arrays. In addition, identifiers are desirable because they should be less costly to duplicate.
+  * Why is this required: When there is a scope that requires a `'static` lifetime, such as in `tokio::spawn`, or when inserting data into a `HashMap`, etc., the data is usually duplicated, since it consumes values and can be used over and over again. In most cases, duplicated data is used. In addition, we thought that `Copy` would be more appropriate than `Clone` because the identifier should be “less resource-intensive to duplicate”.
 * `PartialEq`/`Eq`
 * `Display`/`Debug`
 * `Sync`/`Send`
